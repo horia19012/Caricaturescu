@@ -39,8 +39,8 @@ export default function Home() {
                         Ofera-i Persoanei Dragi
                         <br/>
                         Un Dar Diferit</p>
-                    <button className="cta-btn">
-                        Shop Now
+                    <button className="view-btn" onClick={() => navigate("/comanda")}>
+                        Comanda Acum
                         <i className="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -65,7 +65,7 @@ export default function Home() {
                             <div className="overlay">
                                 <h3>{col.title}</h3>
                                 <p>{col.description}</p>
-                                <button className="view-btn">
+                                <button className="view-btn" onClick={() => navigate("/comanda")}>
                                     Comanda Acum
                                     <i className="fas fa-arrow-right"></i>
                                 </button>
@@ -285,33 +285,6 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="footer">
-                <div className="footer-content">
-                    <div className="footer-section">
-                        <h4>Caricaturescu</h4>
-                        <p>Ofera un cadou diferit</p>
-                    </div>
-                    <div className="footer-section">
-                        <h4>Quick Links</h4>
-                        <a href="#collections">Modele</a>
-                        <a href="#updates">Comanda Acum</a>
-                        <a href="#about">Despre Noi</a>
-                    </div>
-                    <div className="footer-section">
-                        <h4>Urmareste-ne</h4>
-                        <div className="socials">
-                            <a href="#"><i className="fab fa-facebook"></i></a>
-                            <a href="#"><i className="fab fa-instagram"></i></a>
-                            <a href="#"><i className="fab fa-twitter"></i></a>
-                            <a href="#"><i className="fab fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div className="footer-bottom">
-                    <p>© 2025 Caricaturescu. Toate drepturile rezervate.</p>
-                </div>
-            </footer>
         </>
     );
 }

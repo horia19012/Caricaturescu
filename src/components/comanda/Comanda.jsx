@@ -2,6 +2,10 @@ import { useState } from "react";
 import Navbar from "../navbar/Navbar.jsx";
 import "./Comanda.css";
 
+import brownFrame from "/src/assets/brown.webp";
+import blackFrame from "/src/assets/black.jpg";
+import whiteFrame from "/src/assets/white.webp";
+
 export default function Comanda() {
     const [formData, setFormData] = useState({
         prenume: "",
@@ -82,9 +86,9 @@ export default function Comanda() {
                 <h1>Plasează Comanda</h1>
                 <p>Completează formularul de mai jos pentru a plasa comanda.</p>
 
-                <div className="form-wrapper">
-                    <div className="cloud-container">
-                        <form onSubmit={handleSubmit} className="comanda-form">
+                <form onSubmit={handleSubmit} className="comanda-form cloud-container">
+                    <div className="form-content">
+                        <div className="form-inputs">
                             <div className="form-row">
                                 <input
                                     type="text"
@@ -104,22 +108,24 @@ export default function Comanda() {
                                 />
                             </div>
 
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Email *"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                            <input
-                                type="email"
-                                name="confirmEmail"
-                                placeholder="Confirmă Email *"
-                                value={formData.confirmEmail}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="form-row">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email *"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <input
+                                    type="email"
+                                    name="confirmEmail"
+                                    placeholder="Confirmă Email *"
+                                    value={formData.confirmEmail}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                             {emailError && <p className="error-msg">{emailError}</p>}
 
                             <input
@@ -218,37 +224,39 @@ export default function Comanda() {
                                 </select>
                             </div>
 
-                            <button type="submit" className="order-btn">
-                                Trimite Comanda
-                            </button>
-                        </form>
-                    </div>
+                        </div>
 
-                    <div className="file-upload">
-                        <h3>Încarcă imagine pentru comandă</h3>
-                        <input type="file" onChange={handleFileChange} />
-                        {formData.previewUrl && (
-                            <div
-                                className="preview-wrapper"
-                                style={{
-                                    borderColor:
-                                        formData.rama === "alb"
-                                            ? "#fff"
-                                            : formData.rama === "negru"
-                                                ? "#000"
-                                                : "#8B4513",
-                                }}
-                            >
-                                <img
-                                    src={formData.previewUrl}
-                                    alt="Preview"
-                                    className="preview-image"
-                                />
-
-                            </div>
-                        )}
+                        <div className="form-image">
+                            <h3>Încarcă imagine pentru comandă</h3>
+                            <input type="file" onChange={handleFileChange} />
+                            {formData.previewUrl && (
+                                <div
+                                    className="preview-wrapper"
+                                    style={{
+                                        backgroundImage:
+                                            formData.rama === "alb"
+                                                ? `url(${whiteFrame})`
+                                                : formData.rama === "negru"
+                                                    ? `url(${blackFrame})`
+                                                    : `url(${brownFrame})`,
+                                        backgroundSize: "cover",
+                                        backgroundPosition: "center",
+                                        border: "12px solid transparent", // to show the frame texture
+                                    }}
+                                >
+                                    <img
+                                        src={formData.previewUrl}
+                                        alt="Preview"
+                                        className="preview-image"
+                                    />
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
+                    <button type="submit" className="order-btn">
+                        Trimite Comanda
+                    </button>
+                </form>
             </div>
         </>
     );
