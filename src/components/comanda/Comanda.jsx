@@ -5,6 +5,7 @@ import "./Comanda.css";
 import brownFrame from "/src/assets/brown.webp";
 import blackFrame from "/src/assets/black.jpg";
 import whiteFrame from "/src/assets/white.webp";
+import emailjs from "@emailjs/browser";
 
 export default function Comanda() {
     const [formData, setFormData] = useState({
@@ -51,34 +52,63 @@ export default function Comanda() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (formData.email !== formData.confirmEmail) {
             setEmailError("Emailurile nu coincid!");
             return;
         }
         setEmailError("");
-        console.log("Form submitted:", formData);
-        alert("Comanda a fost trimisă!");
-        setFormData({
-            prenume: "",
-            nume: "",
-            email: "",
-            confirmEmail: "",
-            telefon: "",
-            judet: "",
-            localitate: "",
-            strada: "",
-            numar: "",
-            codPostal: "",
-            bloc: "",
-            scara: "",
-            etaj: "",
-            apartament: "",
-            file: null,
-            previewUrl: null,
-            rama: "alb",
-        });
-    };
 
+        emailjs.send(
+            "service_ckatt1j",
+            "template_ydnzn8r",
+            {
+                prenume: formData.prenume,
+                nume: formData.nume,
+                email: formData.email,
+                telefon: formData.telefon,
+                judet: formData.judet,
+                localitate: formData.localitate,
+                strada: formData.strada,
+                numar: formData.numar,
+                codPostal: formData.codPostal,
+                bloc: formData.bloc,
+                scara: formData.scara,
+                etaj: formData.etaj,
+                apartament: formData.apartament,
+                rama: formData.rama,
+            },
+            "kfNQq-7YfEguBFxy1"
+        ).then(
+            (result) => {
+                console.log("Email sent:", result.text);
+                alert("Comanda a fost trimisă!");
+                setFormData({
+                    prenume: "",
+                    nume: "",
+                    email: "",
+                    confirmEmail: "",
+                    telefon: "",
+                    judet: "",
+                    localitate: "",
+                    strada: "",
+                    numar: "",
+                    codPostal: "",
+                    bloc: "",
+                    scara: "",
+                    etaj: "",
+                    apartament: "",
+                    file: null,
+                    previewUrl: null,
+                    rama: "alb",
+                });
+            },
+            (error) => {
+                console.error("Email error:", error.text);
+                alert("Eroare la trimiterea comenzii.");
+            }
+        );
+    };
     return (
         <>
             <Navbar />
